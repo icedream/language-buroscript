@@ -21,6 +21,7 @@ branches:
   only:
     - master
     - develop
+    - ci/travis
 
 git:
   depth: 10
