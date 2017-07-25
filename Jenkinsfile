@@ -24,20 +24,24 @@ def buildPackage(atomChannel) {
 node("linux && x64 && docker") {
   parallel (
     "os=debian, atom=stable": {
-      withEnv([
-        "TRAVIS_OS_NAME=linux",
-      ]) {
-        checkout scm
-        buildPackage("stable")
+      runInsideDocker("debian") {
+        withEnv([
+          "TRAVIS_OS_NAME=linux",
+        ]) {
+          checkout scm
+          buildPackage("stable")
+        }
       }
     },
 
     "os=debian, atom=beta": {
-      withEnv([
-        "TRAVIS_OS_NAME=linux",
-      ]) {
-        checkout scm
-        buildPackage("beta")
+      runInsideDocker("debian") {
+        withEnv([
+          "TRAVIS_OS_NAME=linux",
+        ]) {
+          checkout scm
+          buildPackage("beta")
+        }
       }
     },
   )
