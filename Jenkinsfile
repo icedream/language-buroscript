@@ -11,7 +11,7 @@ def runInsideDocker(image, f) {
 
 def buildPackage(atomChannel) {
   withEnv([
-    "ATOM_CHANNEL=beta",
+    "ATOM_CHANNEL=${atomChannel}",
   ]) {
     sh """
     curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
@@ -25,7 +25,7 @@ node("linux && x64 && docker") {
   parallel (
     "os=debian, atom=stable": {
       withEnv([
-        "ATOM_CHANNEL=stable",
+        "TRAVIS_OS_NAME=linux",
       ]) {
         checkout scm
         buildPackage()
@@ -34,7 +34,7 @@ node("linux && x64 && docker") {
 
     "os=debian, atom=beta": {
       withEnv([
-        "ATOM_CHANNEL=beta",
+        "TRAVIS_OS_NAME=linux",
       ]) {
         checkout scm
         buildPackage()
