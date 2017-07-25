@@ -28,7 +28,7 @@ node("linux && x64 && docker") {
         "TRAVIS_OS_NAME=linux",
       ]) {
         checkout scm
-        buildPackage()
+        buildPackage("stable")
       }
     },
 
@@ -37,7 +37,7 @@ node("linux && x64 && docker") {
         "TRAVIS_OS_NAME=linux",
       ]) {
         checkout scm
-        buildPackage()
+        buildPackage("beta")
       }
     },
   )
