@@ -7,6 +7,12 @@ notifications:
 
 script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
 
+env:
+  matrix:
+    - ATOM_CHANNEL=beta
+    - ATOM_CHANNEL=stable
+
 branches:
   only:
     - master
+    - develop
