@@ -9,6 +9,16 @@ def runInsideDocker(image, f) {
   }
 }
 
+def prepareBuild(os) {
+  switch(os) {
+    case "debian":
+    case "ubuntu":
+      sh "apt-get update"
+      sh "apt-get install -y curl"
+    break
+  }
+}
+
 def buildPackage(atomChannel) {
   withEnv([
     "ATOM_CHANNEL=${atomChannel}",
@@ -27,7 +37,9 @@ node("linux && x64 && docker") {
       runInsideDocker("debian") {
         withEnv([
           "TRAVIS_OS_NAME=linux",
+          "DEBIAN_FRONTEND=noninteractive",
         ]) {
+          prepareBuild("debian")
           checkout scm
           buildPackage("stable")
         }
@@ -38,7 +50,9 @@ node("linux && x64 && docker") {
       runInsideDocker("debian") {
         withEnv([
           "TRAVIS_OS_NAME=linux",
+          "DEBIAN_FRONTEND=noninteractive",
         ]) {
+          prepareBuild("debian")
           checkout scm
           buildPackage("beta")
         }
