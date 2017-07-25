@@ -1,11 +1,16 @@
-language: objective-c
+# Travis CI configuration
+# based on https://github.com/atom/ci/blob/e7c220a0a74be2303df9901776c1dff1136db885/.travis.yml
 
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+language: generic
 
-script: 'curl -s https://raw.githubusercontent.com/atom/ci/master/build-package.sh | sh'
+os:
+  - linux
+  - osx
+
+script:
+  - curl -s -O https://raw.githubusercontent.com/atom/ci/master/build-package.sh
+  - chmod u+x build-package.sh
+  - ./build-package.sh
 
 env:
   matrix:
@@ -16,3 +21,18 @@ branches:
   only:
     - master
     - develop
+
+git:
+  depth: 10
+
+sudo: false
+
+dist: trusty
+
+addons:
+  apt:
+    packages:
+    - build-essential
+    - fakeroot
+    - git
+    - libsecret-1-dev
