@@ -31,32 +31,30 @@ def buildPackage(atomChannel) {
   }
 }
 
-node("linux && x64 && docker") {
-  parallel (
-    "os=debian, atom=stable": {
-      runInsideDocker("debian") {
-        withEnv([
-          "TRAVIS_OS_NAME=linux",
-          "DEBIAN_FRONTEND=noninteractive",
-        ]) {
-          prepareBuild("debian")
-          checkout scm
-          buildPackage("stable")
-        }
+parallel (
+  "os=debian, atom=stable": {
+    runInsideDocker("debian") {
+      withEnv([
+        "TRAVIS_OS_NAME=linux",
+        "DEBIAN_FRONTEND=noninteractive",
+      ]) {
+        prepareBuild("debian")
+        checkout scm
+        buildPackage("stable")
       }
-    },
+    }
+  },
 
-    "os=debian, atom=beta": {
-      runInsideDocker("debian") {
-        withEnv([
-          "TRAVIS_OS_NAME=linux",
-          "DEBIAN_FRONTEND=noninteractive",
-        ]) {
-          prepareBuild("debian")
-          checkout scm
-          buildPackage("beta")
-        }
+  "os=debian, atom=beta": {
+    runInsideDocker("debian") {
+      withEnv([
+        "TRAVIS_OS_NAME=linux",
+        "DEBIAN_FRONTEND=noninteractive",
+      ]) {
+        prepareBuild("debian")
+        checkout scm
+        buildPackage("beta")
       }
-    },
-  )
-}
+    }
+  },
+)
