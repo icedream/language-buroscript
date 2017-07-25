@@ -1,0 +1,13 @@
+{
+  "name": "language-buroscript",
+  "version": "0.0.1",
+  "description": "Script highlighting for BüroWare scripts.",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "coffeelint": "^1.10.1"
+  }
+}

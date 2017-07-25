@@ -1,0 +1,15 @@
+'scopeName': 'text.buroscript'
+'name': 'BüroScript'
+'injectionSelector': 'text.plain'
+'patterns': [
+  {
+    # Befehl
+    'match': '(?<!\\w)@(TXTZUWEISEN|HOEHE|RECHNEN|DEF|bs|DOKU)\\b'
+    'name': 'keyword.control.${1:/downcase}'
+  }
+  {
+    # Blockname
+    'match': '(?<!\\w)((?:K|P|Z)A\\d*)\\b'
+    'name': 'entity.name.block.${1:/downcase}'
+  }
+]
