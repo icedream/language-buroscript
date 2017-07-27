@@ -10,6 +10,6 @@
   {
     # Blockname
     'match': '(?<!\\w)((?:K|P|Z)A\\d*)\\b'
-    'name': 'entity.name.block.${1:/downcase}'
+    'name': 'entity.name.type.object.${1:/downcase}'
   }
 ]
