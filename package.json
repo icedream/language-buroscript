@@ -8,6 +8,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "coffeelint": "^1.10.1"
+    "coffeelint": "^2.0.3"
   }
 }
